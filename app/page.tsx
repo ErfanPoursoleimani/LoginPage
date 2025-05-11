@@ -26,22 +26,93 @@ const SignInPage = () => {
     }
   })
 
+  const [beforeStyle, setBeforeStyle] = useState('before:-left-[250%]')
+  const [leftBlueStyle, setLeftBlueStyle] = useState('left-0')
+  const [rightBlueStyle, setRightBlueStyle] = useState('-right-[50%]')
+  const [loginFormStyle, setLoginFormStyle] = useState('right-0')
+  const [registerFormStyle, setRegisterFormStyle] = useState('right-0 hidden')
+
+  const handleSignUp = () => {
+    setBeforeStyle('before:left-[50%]')
+    setLeftBlueStyle('-left-[50%]')
+    setRightBlueStyle('right-0 delay-[0.6s]')
+    setLoginFormStyle('right-[50%] hidden')
+    setRegisterFormStyle('right-[50%] flex')
+  }
+  const handleLogin = () => {
+    setBeforeStyle('before:-left-[250%]')
+    setLeftBlueStyle('left-0 delay-[0.6s]')
+    setRightBlueStyle('-right-[50%]')
+    setLoginFormStyle('right-0')
+    setRegisterFormStyle('right-0 hidden')
+  }
+
+
   return (
-    <div className="flex justify-center items-center p-20 h-[100vh]">
-      <div className="z-2 overflow-hidden relative w-[85vw] max-w-300 min-h-full bg-[#ffffff] rounded-2xl shadow-2xl">
-        <div className="p-10 absolute w-[50%] h-full right-0 text-black bg-white flex items-center text-center">
-          <form action="" className="w-full space-y-10">
+    <div className="flex justify-center items-center p-10 h-[100vh]">
+      <div className="container z-2 relative overflow-hidden w-[85vw] max-w-300 min-h-full bg-[#ffffff] rounded-2xl shadow-2xl">
+        <div className={`${loginFormStyle} ease-in-out duration-[1.2s] delay-[0.6s] absolute w-[50%] h-full flex z-2 text-black bg-white items-center text-center p-10`}>
+          <form className="w-full space-y-10">
             <h1 className="text-[36px]">Login</h1>
-            <div>
-              <input type="text" placeholder="username" className="p-2 rounded-[4px] w-full bg-[#e4e0e0] border-2"/>
-            </div>
+            <Box
+              component="form"
+              sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+              noValidate
+              autoComplete="off"
+            >
+              <div>
+                <TextField
+                  required
+                  label="شماره دانشجویی"
+                  defaultValue=""
+                />
+              </div>
+            </Box>
           </form>
         </div>
-        <div className="toggle-box absolute w-full h-full before:content-[''] before:-z-1 before:left-[-250%] before:rounded-[150px] before:absolute before:bg-blue-500 before:w-[300%] before:h-[100%]">
-          <div className="w-[50%] h-full z-2 flex flex-col justify-center items-center space-y-4">
-            <h1>سلام، خوش آمدید</h1>
+        <div className={`${registerFormStyle} ease-in-out duration-[1.2s] delay-[0.6s] absolute w-[50%] h-full z-2 text-black bg-white items-center text-center p-10`}>
+          <form className="w-full space-y-10">
+            <h1 className="text-[36px]">Registration</h1>
+            <Box
+              component="form"
+              sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+              noValidate
+              autoComplete="off"
+            >
+              <div>
+                <TextField
+                  required
+                  label="نام"
+                  defaultValue=""
+                />
+              </div>
+              <div>
+                <TextField
+                  required
+                  label="نام خوانوادگی"
+                  defaultValue=""
+                />
+              </div>
+              <div>
+                <TextField
+                  required
+                  label="شماره دانشجویی"
+                  defaultValue=""
+                />
+              </div>
+            </Box>
+          </form>
+        </div>
+        <div className={`toggle-box absolute w-full h-full before:ease-in-out before:duration-[1.8s] before:content-[''] ${beforeStyle} before:-z-1 before:left-[-250%] before:rounded-[150px] before:absolute before:bg-blue-500 before:w-[300%] before:h-[100%]`}>
+          <div className={`${leftBlueStyle} ease-in-out duration-[1.2s] absolute w-[50%] h-full z-1 flex flex-col justify-center items-center space-y-4`}>
+            <h1>خوش برگشتید</h1>
             <p>هنوز ثبت نام نکرده اید؟</p>
-            <button className="w-[160px] h-[46px] rounded-[8px] border-2 border-white">ثبت نام</button>
+            <button onClick={handleSignUp} className="w-[160px] h-[46px] rounded-[8px] border-2 border-white">ثبت نام</button>
+          </div>
+          <div className={`${rightBlueStyle} ease-in-out duration-[1.2s] absolute w-[50%] h-full z-1 flex flex-col justify-center items-center space-y-4`}>
+            <h1>خوش آمدید</h1>
+            <p>قبلا ثبت نام کرده اید؟</p>
+            <button onClick={handleLogin} className="w-[160px] h-[46px] rounded-[8px] border-2 border-white">ورود</button>
           </div>
         </div>
       </div>
