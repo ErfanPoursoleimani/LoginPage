@@ -31,6 +31,7 @@ const SignInPage = () => {
   const [rightBlueStyle, setRightBlueStyle] = useState('-right-[50%]')
   const [loginFormStyle, setLoginFormStyle] = useState('right-0')
   const [registerFormStyle, setRegisterFormStyle] = useState('right-0 hidden')
+  const [active, setActive] = useState("")
 
   const handleSignUp = () => {
     setBeforeStyle('before:left-[50%]')
@@ -38,6 +39,7 @@ const SignInPage = () => {
     setRightBlueStyle('right-0 delay-[0.6s]')
     setLoginFormStyle('right-[50%] hidden')
     setRegisterFormStyle('right-[50%] flex')
+    setActive("active")
   }
   const handleLogin = () => {
     setBeforeStyle('before:-left-[250%]')
@@ -45,21 +47,22 @@ const SignInPage = () => {
     setRightBlueStyle('-right-[50%]')
     setLoginFormStyle('right-0')
     setRegisterFormStyle('right-0 hidden')
+    setActive("")
   }
 
 
   return (
-    <div className="flex justify-center items-center p-10 h-[100vh]">
-      <div className="container z-2 relative overflow-hidden w-[85vw] max-w-300 min-h-full bg-[#ffffff] rounded-2xl shadow-2xl">
-        <div className={`${loginFormStyle} ease-in-out duration-[1.2s] delay-[0.6s] absolute w-[50%] h-full flex z-2 text-black bg-white items-center text-center p-10`}>
-          <form className="w-full space-y-10">
-            <h1 className="text-[36px]">Login</h1>
+    <div className="flex justify-center items-center p-5 h-[100vh]">
+      <div className={`container ${active} z-2 relative overflow-hidden w-[85vw] max-w-300 min-h-full bg-[#ffffff] rounded-2xl shadow-2xl`}>
+        <div className={`form-box ${loginFormStyle} ease-in-out duration-[1.2s] delay-[0.6s] absolute w-[50%] h-full flex z-2 text-black bg-white items-center text-center p-10`}>
             <Box
+              className="w-full space-y-5"
               component="form"
               sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
               noValidate
               autoComplete="off"
             >
+            <h1 className="text-[36px]">ورود</h1>
               <div>
                 <TextField
                   required
@@ -68,48 +71,46 @@ const SignInPage = () => {
                 />
               </div>
             </Box>
-          </form>
         </div>
-        <div className={`${registerFormStyle} ease-in-out duration-[1.2s] delay-[0.6s] absolute w-[50%] h-full z-2 text-black bg-white items-center text-center p-10`}>
-          <form className="w-full space-y-10">
-            <h1 className="text-[36px]">Registration</h1>
-            <Box
-              component="form"
-              sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
-              noValidate
-              autoComplete="off"
-            >
-              <div>
-                <TextField
-                  required
-                  label="نام"
-                  defaultValue=""
-                />
-              </div>
-              <div>
-                <TextField
-                  required
-                  label="نام خوانوادگی"
-                  defaultValue=""
-                />
-              </div>
-              <div>
-                <TextField
-                  required
-                  label="شماره دانشجویی"
-                  defaultValue=""
-                />
-              </div>
-            </Box>
-          </form>
+        <div className={`form-box ${registerFormStyle} ease-in-out duration-[1.2s] delay-[0.6s] absolute w-[50%] h-full z-2 text-black bg-white items-center text-center p-10`}>
+          <Box
+            className="w-full space-y-5"
+            component="form"
+            sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
+            noValidate
+            autoComplete="off"
+          >
+          <h1 className="text-[36px]">ثبت نام</h1>
+            <div>
+              <TextField
+                required
+                label="نام"
+                defaultValue=""
+              />
+            </div>
+            <div>
+              <TextField
+                required
+                label="نام خوانوادگی"
+                defaultValue=""
+              />
+            </div>
+            <div>
+              <TextField
+                required
+                label="شماره دانشجویی"
+                defaultValue=""
+              />
+            </div>
+          </Box>
         </div>
-        <div className={`toggle-box absolute w-full h-full before:ease-in-out before:duration-[1.8s] before:content-[''] ${beforeStyle} before:-z-1 before:left-[-250%] before:rounded-[150px] before:absolute before:bg-blue-500 before:w-[300%] before:h-[100%]`}>
-          <div className={`${leftBlueStyle} ease-in-out duration-[1.2s] absolute w-[50%] h-full z-1 flex flex-col justify-center items-center space-y-4`}>
+        <div className={`toggle-box absolute w-full h-full before:ease-in-out before:duration-[1.8s] before:content-[''] ${beforeStyle} before:-z-1 before:left-[-250%] before:rounded-[150px] before:absolute before:bg-red-500 before:w-[300%] before:h-[100%]`}>
+          <div className={`toggle-pannel toggle-left ${leftBlueStyle} ease-in-out duration-[1.2s] absolute w-[50%] h-full z-1 flex flex-col justify-center items-center space-y-4`}>
             <h1>خوش برگشتید</h1>
             <p>هنوز ثبت نام نکرده اید؟</p>
             <button onClick={handleSignUp} className="w-[160px] h-[46px] rounded-[8px] border-2 border-white">ثبت نام</button>
           </div>
-          <div className={`${rightBlueStyle} ease-in-out duration-[1.2s] absolute w-[50%] h-full z-1 flex flex-col justify-center items-center space-y-4`}>
+          <div className={`toggle-pannel toggle-right ${rightBlueStyle} ease-in-out duration-[1.2s] absolute w-[50%] h-full z-1 flex flex-col justify-center items-center space-y-4`}>
             <h1>خوش آمدید</h1>
             <p>قبلا ثبت نام کرده اید؟</p>
             <button onClick={handleLogin} className="w-[160px] h-[46px] rounded-[8px] border-2 border-white">ورود</button>
